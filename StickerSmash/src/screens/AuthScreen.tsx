@@ -1,16 +1,20 @@
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
-const myImage = require("./assets/1.png");
+const myImage = require("../../assets/1.png");
 
 export default function Auth() {
   return (
     <View>
       <Image source={myImage} style={styles.image} />
-      <Text style={styles.title}>EXPENIO</Text>
+      <Text style={styles.title}>StickerSmash</Text>
       <Text style={styles.description}>
-        Going cashless has never been this easier with the world’s most leading
-        expense manager.
+        Add an emoji to your favorite image(s) and save to your device.
       </Text>
-      <TouchableOpacity onPress={onAuthenticate} style={styles.btn}>
+      <Text style={styles.description}>
+        Remain calm and during authentication, for AI can detect abnormal logins.
+      </Text>
+      <TouchableOpacity 
+    //   onPress={onAuthenticate} 
+      style={styles.btn}>
         <Text style={styles.text}>Login</Text>
       </TouchableOpacity>
     </View>
@@ -23,13 +27,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     alignSelf: "center",
-    backgroundColor: "#0893FC",
+    backgroundColor: "#25292e",
     padding: 10,
     borderRadius: 5,
   },
   image: {
     width: 400,
-    height: 461,
+    height: 300,
+    // display: 'flex',
+    margin: 'auto'
+
   },
   text: {
     color: "#fff",
@@ -47,6 +54,6 @@ const styles = StyleSheet.create({
     color: "gray",
     textAlign: "center",
     marginHorizontal: 20,
-    marginBottom: 50,
+    marginBottom: 30,
   },
 });
