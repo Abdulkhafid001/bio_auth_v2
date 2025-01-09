@@ -9,7 +9,7 @@ interface SvgComponentProps {
     [key: string]: any;
 }
 
-const SvgComponent: React.FC<SvgComponentProps> = (props) => (
+const CardSVG: React.FC<SvgComponentProps> = (props) => (
     <Svg
         width={354}
         height={224}
@@ -128,4 +128,4 @@ const SvgComponent: React.FC<SvgComponentProps> = (props) => (
   </Svg>
 )
 
-export default SvgComponent
+export default CardSVG

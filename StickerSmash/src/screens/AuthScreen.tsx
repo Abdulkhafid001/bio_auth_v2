@@ -1,7 +1,12 @@
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
+import React from "react";
 const myImage = require("../../assets/1.png");
 
-export default function Auth() {
+interface AuthProps {
+  onAuthenticate: () => void;
+}
+
+const Auth: React.FC<AuthProps> = ({ onAuthenticate }) => {
   return (
     <View>
       <Image source={myImage} style={styles.image} />
@@ -10,16 +15,15 @@ export default function Auth() {
         Add an emoji to your favorite image(s) and save to your device.
       </Text>
       <Text style={styles.description}>
-        Remain calm and during authentication, for AI can detect abnormal logins.
+        Remain calm and during authentication, for AI can detect abnormal
+        logins.
       </Text>
-      <TouchableOpacity 
-    //   onPress={onAuthenticate} 
-      style={styles.btn}>
+      <TouchableOpacity onPress={onAuthenticate} style={styles.btn}>
         <Text style={styles.text}>Login</Text>
       </TouchableOpacity>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   btn: {
@@ -35,8 +39,7 @@ const styles = StyleSheet.create({
     width: 400,
     height: 300,
     // display: 'flex',
-    margin: 'auto'
-
+    margin: "auto",
   },
   text: {
     color: "#fff",
@@ -57,3 +60,5 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
 });
+
+export default Auth;
