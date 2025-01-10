@@ -14,24 +14,26 @@ import CircleButton from "@/src/components/CircleButton";
 import EmojiPicker from "@/src/components/EmojiPicker";
 import EmojiList from "@/src/components/EmojiList";
 import EmojiSticker from "@/src/components/EmojiSticker";
-
 const PlaceholderImage = require("@/assets/images/background-image.png");
 
 export default function Index() {
   const [selectedImage, setSelectedImage] = useState<string | undefined>(
     undefined
   );
+  const [status, requestPermission] = MediaLibrary.usePermissions();
+
+  if (status === null) {
+    requestPermission();
+  }
+  const imageRef2 = useRef<View>(null);
+
+  const imageRef = useRef<View | HTMLElement | null>(null);
+
   const [showAppOptions, setShowAppOptions] = useState<boolean>(false);
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [pickedEmoji, setPickedEmoji] = useState<ImageSource | undefined>(
     undefined
   );
-  const [status, requestPermission] = MediaLibrary.usePermissions();
-  const imageRef = useRef<View>(null);
-
-  if (status === null) {
-    requestPermission();
-  }
 
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -39,12 +41,12 @@ export default function Index() {
       allowsEditing: true,
       quality: 1,
     });
-
     if (!result.canceled) {
       setSelectedImage(result.assets[0].uri);
       setShowAppOptions(true);
+      console.log(result);
     } else {
-      alert("You did not select any image.");
+      console.log("You didn't select any image. ");
     }
   };
 
@@ -55,7 +57,6 @@ export default function Index() {
   const onAddSticker = () => {
     setIsModalVisible(true);
   };
-
   const onModalClose = () => {
     setIsModalVisible(false);
   };
@@ -77,16 +78,20 @@ export default function Index() {
       }
     } else {
       try {
-        const dataUrl = await domtoimage.toJpeg(imageRef.current, {
-          quality: 0.95,
-          width: 320,
-          height: 440,
-        });
+        if (imageRef.current instanceof HTMLElement) {
+          const dataUrl = await domtoimage.toJpeg(imageRef.current, {
+            quality: 0.95,
+            width: 320,
+            height: 440,
+          });
 
-        let link = document.createElement("a");
-        link.download = "sticker-smash.jpeg";
-        link.href = dataUrl;
-        link.click();
+          let link = document.createElement("a");
+          link.download = "sticker-smash.jpeg";
+          link.href = dataUrl;
+          link.click();
+        } else {
+          console.log("Image ref is not an instance of HTMLElement");
+        }
       } catch (e) {
         console.log(e);
       }
@@ -96,7 +101,7 @@ export default function Index() {
   return (
     <GestureHandlerRootView style={styles.container}>
       <View style={styles.imageContainer}>
-        <View ref={imageRef} collapsable={false}>
+        <View ref={imageRef2} collapsable={false}>
           <ImageViewer
             imgSource={PlaceholderImage}
             selectedImage={selectedImage}
@@ -106,6 +111,7 @@ export default function Index() {
           )}
         </View>
       </View>
+      <View style={styles.extraMargin}></View>
       {showAppOptions ? (
         <View style={styles.optionsContainer}>
           <View style={styles.optionsRow}>
@@ -152,11 +158,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   optionsContainer: {
+    marginTop: 50,
     position: "absolute",
     bottom: 80,
   },
   optionsRow: {
     alignItems: "center",
     flexDirection: "row",
+  },
+  extraMargin: {
+    marginBottom: 0,
   },
 });
