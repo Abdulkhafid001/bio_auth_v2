@@ -1,8 +1,6 @@
 import React from "react";
 import {
   Image,
-  View,
-  Button,
   Text,
   TouchableOpacity,
   StyleSheet,
@@ -11,6 +9,8 @@ import {
 } from "react-native";
 import CardSVG from "../components/CardSVG";
 
+import { useRouter } from "expo-router";
+
 interface PaymentScreenProps {
   setIsAuthenticated: (value: boolean) => void;
 }
@@ -18,6 +18,8 @@ interface PaymentScreenProps {
 const PaymentScreen: React.FC<PaymentScreenProps> = ({
   setIsAuthenticated,
 }) => {
+  // const navigation = useNavigation();
+  const router = useRouter();
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Payment</Text>
@@ -42,6 +44,13 @@ const PaymentScreen: React.FC<PaymentScreenProps> = ({
         placeholderTextColor="gray"
       />
       {/* <CardSVG /> */}
+      <TouchableOpacity
+        onPress={() => router.push("/(tabs)/AppHomepage")}
+        style={styles.btn}
+      >
+        <Text style={styles.text}>Start adding emoji to photo's</Text>
+      </TouchableOpacity>
+
       <TouchableOpacity
         onPress={() => setIsAuthenticated(false)}
         style={styles.btn}
@@ -90,7 +99,7 @@ const styles = StyleSheet.create({
     fontSize: 40,
     fontWeight: "bold",
     // alignSelf: "flex-start",
-    textAlign: 'center',
+    textAlign: "center",
     paddingLeft: 15,
     paddingBottom: 20,
   },

@@ -5,7 +5,7 @@ export default function AboutScreen() {
     <View style={styles.container}>
       <Text style={styles.text}>About screen</Text>
     </View>
-  );
+  ); 
 }
 
 const styles = StyleSheet.create({

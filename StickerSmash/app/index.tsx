@@ -5,6 +5,9 @@ import PaymentScreen from "@/src/screens/PaymentScreen";
 import { useState, useEffect } from "react";
 import * as LocalAuthentication from "expo-local-authentication";
 
+// import { NavigationContainer } from "@react-navigation/native";
+// import { createStackNavigator } from "@react-navigation/stack";
+
 export default function Index() {
   // check if app supports biometrics
 

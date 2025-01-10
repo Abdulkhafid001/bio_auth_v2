@@ -14,6 +14,8 @@ import CircleButton from "@/src/components/CircleButton";
 import EmojiPicker from "@/src/components/EmojiPicker";
 import EmojiList from "@/src/components/EmojiList";
 import EmojiSticker from "@/src/components/EmojiSticker";
+
+
 const PlaceholderImage = require("@/assets/images/background-image.png");
 
 export default function Index() {
@@ -64,7 +66,7 @@ export default function Index() {
   const onSaveImageAsync = async () => {
     if (Platform.OS !== "web") {
       try {
-        const localUri = await captureRef(imageRef, {
+        const localUri = await captureRef(imageRef2, {
           height: 440,
           quality: 1,
         });
